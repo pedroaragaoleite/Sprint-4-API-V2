@@ -1,10 +1,10 @@
 const containerText = document.getElementById('container_text') as HTMLParagraphElement;
 const btnNext = document.getElementById('btn_next') as HTMLButtonElement;
-
-
 const btn1 = document.getElementById('btn_score1') as HTMLButtonElement;
 const btn2 = document.getElementById('btn_score2') as HTMLButtonElement;
 const btn3 = document.getElementById('btn_score3') as HTMLButtonElement;
+const containerWeather = document.getElementById('weather') as HTMLUListElement;
+const weatherIcon = document.getElementById('weather_icon') as HTMLImageElement;
 
 
 
@@ -99,6 +99,36 @@ const randomChuck = async () => {
 }
 
 
+const optionsWeather = {
+    method: 'GET',
+    headers: {
+        'X-RapidAPI-Key': '79bb27e588msh814253e73cb0541p16ba2bjsn43e56fa34d0b',
+        'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+    }
+};
+
+const weatherFetch = () => {
+    let latitude: number;
+    let longitude: number;
+    navigator.geolocation.getCurrentPosition((success) => {
+        latitude = success.coords.latitude;
+        longitude = success.coords.longitude;
+        const urlWeather = `https://weatherapi-com.p.rapidapi.com/current.json?q=${latitude}%2C${longitude}`;
+
+        fetch(urlWeather, optionsWeather)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.current.condition.text);
+                console.log(data.current.condition.icon);
+                weatherIcon.src = data.current.condition.icon;
+                containerWeather.innerHTML = data.current.condition.text
+            })
+
+    });
+}
+
+
+
 if (btn1 && btn2 && btn3) {
     btn1.addEventListener('click', () => {
         getScore(joke, 1);
@@ -111,7 +141,6 @@ if (btn1 && btn2 && btn3) {
     });
 
 }
-
 
 function getScore(joke: string, score: number): void {
     report = report.filter(item => item.joke !== joke);
@@ -142,3 +171,4 @@ function nextJoke() {
 }
 
 randomFetch();
+weatherFetch();

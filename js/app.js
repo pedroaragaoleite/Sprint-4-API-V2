@@ -13,6 +13,8 @@ const btnNext = document.getElementById('btn_next');
 const btn1 = document.getElementById('btn_score1');
 const btn2 = document.getElementById('btn_score2');
 const btn3 = document.getElementById('btn_score3');
+const containerWeather = document.getElementById('weather');
+const weatherIcon = document.getElementById('weather_icon');
 let report = [];
 let joke;
 const urlApi = 'https://icanhazdadjoke.com';
@@ -70,6 +72,30 @@ const randomChuck = () => __awaiter(void 0, void 0, void 0, function* () {
         console.error('Error', error);
     }
 });
+const optionsWeather = {
+    method: 'GET',
+    headers: {
+        'X-RapidAPI-Key': '79bb27e588msh814253e73cb0541p16ba2bjsn43e56fa34d0b',
+        'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
+    }
+};
+const weatherFetch = () => {
+    let latitude;
+    let longitude;
+    navigator.geolocation.getCurrentPosition((success) => {
+        latitude = success.coords.latitude;
+        longitude = success.coords.longitude;
+        const urlWeather = `https://weatherapi-com.p.rapidapi.com/current.json?q=${latitude}%2C${longitude}`;
+        fetch(urlWeather, optionsWeather)
+            .then(response => response.json())
+            .then(data => {
+            console.log(data.current.condition.text);
+            console.log(data.current.condition.icon);
+            weatherIcon.src = data.current.condition.icon;
+            containerWeather.innerHTML = data.current.condition.text;
+        });
+    });
+};
 if (btn1 && btn2 && btn3) {
     btn1.addEventListener('click', () => {
         getScore(joke, 1);
@@ -104,3 +130,4 @@ function nextJoke() {
     }
 }
 randomFetch();
+weatherFetch();
