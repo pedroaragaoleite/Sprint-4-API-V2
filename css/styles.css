@@ -9,6 +9,8 @@
 ol,
 ul {
   list-style: none;
+  display: flex;
+  align-items: center;
 }
 
 a {
@@ -21,41 +23,96 @@ img {
 }
 
 body {
-    position: relative;
+  position: relative;
 }
 
-.showcase {
-    background-image: url('../assets/img/background_desktop.jpg');
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100vh;
-}
-
-.layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background: rgb(105,105,105,.8);
-    width: 100%;
-    height: 100vh;
+#container_bg {
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1000px;
+  height: 1000px;
 }
 
 main {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate( -50%, -50%);
-    width: 600px;
-    height: 250px;
-    background: #ffffff;
-    border-radius: 5px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* position: absolute; */
+  width: 100%;
+  height: 70vh;
+  z-index: 10;
+  /* height: 100vh; */
 }
 
-#container_result {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+h1 {
+  margin-bottom: 90px;
 }
 
+#container_text {
+  color: #ffffff;
+  font-size: 20px;
+  margin-bottom: 60px;
+  width: 350px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#container_score {
+  margin-bottom: 30px;
+}
+
+.btn_score {
+  width: 80px;
+  height: 80px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+#btn_next {
+  margin-top: 30px;
+  padding: 20px 60px;
+  background-color: #FFD43B;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.svg1 {
+  background-image: url('../assets/svg/blob1.svg');
+}
+
+.svg2 {
+  background-image: url('../assets/svg/blob2.svg');
+}
+
+.svg3 {
+  background-image: url('../assets/svg/blob3.svg');
+}
+
+.svg4 {
+  background-image: url('../assets/svg/blob4.svg');
+}
+
+.svg5 {
+  background-image: url('../assets/svg/blob5.svg');
+}
+
+.svg6 {
+  background-image: url('../assets/svg/blob6.svg');
+}
+
+.svg7 {
+  background-image: url('../assets/svg/blob7.svg');
+}
+
+.svg8 {
+  background-image: url('../assets/svg/blob8.svg');
+}
+
+.svg9 {
+  background-image: url('../assets/svg/blob9.svg');
+}

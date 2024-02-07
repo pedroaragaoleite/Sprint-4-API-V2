@@ -15,6 +15,7 @@ const btn2 = document.getElementById('btn_score2');
 const btn3 = document.getElementById('btn_score3');
 const containerWeather = document.getElementById('weather');
 const weatherIcon = document.getElementById('weather_icon');
+const containerBg = document.getElementById('container_bg');
 let report = [];
 let joke;
 const urlApi = 'https://icanhazdadjoke.com';
@@ -27,7 +28,7 @@ const fetchOptions = {
 };
 const randomFetch = () => __awaiter(void 0, void 0, void 0, function* () {
     let result = Math.floor(Math.random() * 2);
-    console.log(result);
+    // console.log(result);
     if (result === 0) {
         randomJoke();
     }
@@ -89,10 +90,10 @@ const weatherFetch = () => {
         fetch(urlWeather, optionsWeather)
             .then(response => response.json())
             .then(data => {
-            console.log(data.current.condition.text);
-            console.log(data.current.condition.icon);
+            // console.log(data);
+            // console.log(data.current.condition.icon);
             weatherIcon.src = data.current.condition.icon;
-            containerWeather.innerHTML = data.current.condition.text;
+            containerWeather.innerHTML = `${data.current.temp_c}ºC`;
         });
     });
 };
@@ -115,18 +116,24 @@ function getScore(joke, score) {
     console.log(report);
 }
 function nextJoke() {
+    let randomSvg = Math.ceil(Math.random() * 10);
+    console.log(randomSvg);
+    // containerBg.classList.remove('svg1');
     const exist = report.some(item => item.joke === joke);
-    console.log(exist);
+    // console.log(exist);
     if (!exist) {
         console.log(report);
         const date = new Date().toISOString();
         const notScoredJoke = { joke, date };
         report.push(notScoredJoke);
         randomFetch();
-        console.log(report);
+        // containerBg.classList.remove(`svg${randomSvg}`);
+        // containerBg.classList.add(`svg${randomSvg}`);
+        // console.log(report);
     }
     else {
         randomFetch();
+        // containerBg.classList.add(`svg${randomSvg}`);
     }
 }
 randomFetch();
