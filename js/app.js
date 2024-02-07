@@ -10,6 +10,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const containerText = document.getElementById('container_text');
 const btnNext = document.getElementById('btn_next');
+const btn1 = document.getElementById('btn_score1');
+const btn2 = document.getElementById('btn_score2');
+const btn3 = document.getElementById('btn_score3');
+let report = [];
+let joke;
 const urlApi = 'https://icanhazdadjoke.com';
 const headers = new Headers();
 headers.append('Accept', 'application/json');
@@ -18,7 +23,16 @@ const fetchOptions = {
     method: 'GET',
     headers: headers,
 };
-var joke;
+const randomFetch = () => __awaiter(void 0, void 0, void 0, function* () {
+    let result = Math.floor(Math.random() * 2);
+    console.log(result);
+    if (result === 0) {
+        randomJoke();
+    }
+    else {
+        randomChuck();
+    }
+});
 function randomJoke() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -32,12 +46,6 @@ function randomJoke() {
                 containerText.innerHTML = `${ramdomData.joke}`;
                 joke = ramdomData.joke;
             }
-            // const nextClickHandler = () => {
-            //     report.push({ joke: ramdomData.joke, date: new Date().toISOString() });
-            //     console.log(report);
-            //     btnNext.removeEventListener('click', nextClickHandler);     
-            // }
-            // btnNext.addEventListener('click', nextClickHandler, { once: true }); 
         }
         catch (error) {
             console.error('Error', error);
@@ -62,28 +70,24 @@ const randomChuck = () => __awaiter(void 0, void 0, void 0, function* () {
         console.error('Error', error);
     }
 });
-const randomFetch = () => __awaiter(void 0, void 0, void 0, function* () {
-    let result = Math.floor(Math.random() * 2);
-    console.log(result);
-    if (result === 0) {
-        randomJoke();
-    }
-    else {
-        randomChuck();
-    }
-});
-function getScore(id) {
+if (btn1 && btn2 && btn3) {
+    btn1.addEventListener('click', () => {
+        getScore(joke, 1);
+    });
+    btn2.addEventListener('click', () => {
+        getScore(joke, 2);
+    });
+    btn3.addEventListener('click', () => {
+        getScore(joke, 3);
+    });
+}
+function getScore(joke, score) {
     report = report.filter(item => item.joke !== joke);
-    const score = id;
     const date = new Date().toISOString();
     const scoredJoke = { joke, score, date };
     report.push(scoredJoke);
     console.log(report);
 }
-let report = [];
-// const saveJokes = (data: any) => {
-//     console.log(data);
-// }
 function nextJoke() {
     const exist = report.some(item => item.joke === joke);
     console.log(exist);
@@ -92,6 +96,7 @@ function nextJoke() {
         const date = new Date().toISOString();
         const notScoredJoke = { joke, date };
         report.push(notScoredJoke);
+        randomFetch();
         console.log(report);
     }
     else {
