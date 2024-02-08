@@ -28,11 +28,12 @@ body {
 
 #container_bg {
   position: absolute;
-  top: -10%;
+  top: -30%;
   left: 50%;
   transform: translateX(-50%);
-  width: 1000px;
-  height: 1000px;
+  
+  width: 800px;
+  height: 800px;
 }
 
 main {

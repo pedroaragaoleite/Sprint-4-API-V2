@@ -49,6 +49,7 @@ function randomJoke() {
                 containerText.innerHTML = `${ramdomData.joke}`;
                 joke = ramdomData.joke;
             }
+            randomBg();
         }
         catch (error) {
             console.error('Error', error);
@@ -68,6 +69,7 @@ const randomChuck = () => __awaiter(void 0, void 0, void 0, function* () {
             containerText.innerHTML = `${joke}`;
             // joke = ramdomData.joke;
         }
+        randomBg();
     }
     catch (error) {
         console.error('Error', error);
@@ -116,9 +118,6 @@ function getScore(joke, score) {
     console.log(report);
 }
 function nextJoke() {
-    let randomSvg = Math.ceil(Math.random() * 10);
-    console.log(randomSvg);
-    // containerBg.classList.remove('svg1');
     const exist = report.some(item => item.joke === joke);
     // console.log(exist);
     if (!exist) {
@@ -127,14 +126,24 @@ function nextJoke() {
         const notScoredJoke = { joke, date };
         report.push(notScoredJoke);
         randomFetch();
-        // containerBg.classList.remove(`svg${randomSvg}`);
-        // containerBg.classList.add(`svg${randomSvg}`);
-        // console.log(report);
     }
     else {
         randomFetch();
-        // containerBg.classList.add(`svg${randomSvg}`);
     }
 }
+let numbers = [];
+const randomBg = () => {
+    let randomSvg = Math.ceil(Math.random() * 9);
+    let lastIndex = numbers.length - 1;
+    if (lastIndex >= 0) {
+        const lastValue = numbers[lastIndex];
+        console.log(lastValue + " " + "ultimo valor");
+        containerBg.classList.remove(`svg${lastValue}`);
+    }
+    numbers.push(randomSvg);
+    console.log(randomSvg);
+    // console.log(numbers);
+    containerBg.classList.add(`svg${randomSvg}`);
+};
 randomFetch();
 weatherFetch();

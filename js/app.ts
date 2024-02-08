@@ -68,6 +68,7 @@ async function randomJoke() {
             containerText.innerHTML = `${ramdomData.joke}`;
             joke = ramdomData.joke;
         }
+        randomBg();
 
     } catch (error) {
         console.error('Error', error);
@@ -93,6 +94,7 @@ const randomChuck = async () => {
             containerText.innerHTML = `${joke}`;
             // joke = ramdomData.joke;
         }
+        randomBg();
 
     } catch (error) {
         console.error('Error', error);
@@ -156,11 +158,7 @@ function getScore(joke: string, score: number): void {
 
 
 
-function nextJoke() {
-    let randomSvg: number = Math.ceil(Math.random() * 10);
-    console.log(randomSvg);
-    // containerBg.classList.remove('svg1');
-
+function nextJoke() {    
     const exist = report.some(item => item.joke === joke);
     // console.log(exist);
     if (!exist) {
@@ -171,13 +169,25 @@ function nextJoke() {
         report.push(notScoredJoke);
         randomFetch();
 
-        // containerBg.classList.remove(`svg${randomSvg}`);
-        // containerBg.classList.add(`svg${randomSvg}`);
-        // console.log(report);
     } else {
         randomFetch();
-        // containerBg.classList.add(`svg${randomSvg}`);
     }
+}
+let numbers: number[] = [];
+
+const randomBg = () => {
+    let randomSvg: number = Math.ceil(Math.random() * 9);
+    let lastIndex = numbers.length -1;
+    if(lastIndex >= 0 ) {
+        const lastValue = numbers[lastIndex];
+        console.log(lastValue + " " + "ultimo valor");
+        containerBg.classList.remove(`svg${lastValue}`);
+        
+    }
+    numbers.push(randomSvg);
+    console.log(randomSvg);
+    // console.log(numbers);
+    containerBg.classList.add(`svg${randomSvg}`);
 }
 
 randomFetch();
