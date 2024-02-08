@@ -81,7 +81,7 @@ const randomChuck = () => __awaiter(void 0, void 0, void 0, function* () {
 const optionsWeather = {
     method: 'GET',
     headers: {
-        'X-RapidAPI-Key': '79bb27e588msh814253e73cb0541p16ba2bjsn43e56fa34d0b',
+        'X-RapidAPI-Key': '',
         'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
     }
 };
