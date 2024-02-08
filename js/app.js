@@ -117,13 +117,19 @@ if (btn1 && btn2 && btn3) {
 }
 // the function accepts the params joke and score
 function getScore(joke, score) {
+    // remove the joke thats is equal to item.joke to not duplicate
     report = report.filter(item => item.joke !== joke);
     console.log(report);
     const date = new Date().toISOString();
     const scoredJoke = { joke, score, date };
+    // add the joke with the new score or updated score
     report.push(scoredJoke);
     console.log(report);
 }
+// this function calls the randomFetch() function
+// if the client doesnt want to score the Joke, can click in the nextJoke button
+// the function check first if the joke is already in the array and if doesnt exist
+// push's it to array
 function nextJoke() {
     const exist = report.some(item => item.joke === joke);
     // console.log(exist);
@@ -139,6 +145,9 @@ function nextJoke() {
     }
 }
 let numbers = [];
+// this function changes the background
+// first saves a randomNumber in a array
+// remove and add class depending on the randomNumber 
 const randomBg = () => {
     let randomSvg = Math.ceil(Math.random() * 9);
     let lastIndex = numbers.length - 1;
