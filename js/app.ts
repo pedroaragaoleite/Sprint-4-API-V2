@@ -41,6 +41,8 @@ const fetchOptions: RequestInit = {
     headers: headers,
 };
 
+
+// this functions call the API randomJoke or Chuck depending in the random number result
 const randomFetch = async () => {
     let result = Math.floor(Math.random() * 2);
     // console.log(result);
@@ -52,7 +54,7 @@ const randomFetch = async () => {
     }
 }
 
-
+// this function call the ramdomJoke API
 async function randomJoke() {
     try {
         const response = await fetch(urlApi, fetchOptions);
@@ -62,7 +64,7 @@ async function randomJoke() {
         }
         const ramdomData: RandomJoke = await response.json();
 
-        console.log(ramdomData.joke);
+        // console.log(ramdomData.joke);
 
         if (containerText) {
             containerText.innerHTML = `${ramdomData.joke}`;
@@ -78,6 +80,7 @@ async function randomJoke() {
 
 const urlApiChuck: string = "https://api.chucknorris.io/jokes/random";
 
+// this function call the Chuck API
 const randomChuck = async () => {
     try {
         const res = await fetch(urlApiChuck);
@@ -110,6 +113,7 @@ const optionsWeather = {
     }
 };
 
+// // this function call the Weather API
 const weatherFetch = () => {
     let latitude: number;
     let longitude: number;
@@ -131,7 +135,7 @@ const weatherFetch = () => {
 }
 
 
-
+// addEventListners to the Score buttons and call the function GetScore with the params joke and score
 if (btn1 && btn2 && btn3) {
     btn1.addEventListener('click', () => {
         getScore(joke, 1);
@@ -145,19 +149,24 @@ if (btn1 && btn2 && btn3) {
 
 }
 
+// the function accepts the params joke and score
 function getScore(joke: string, score: number): void {
+    // remove the joke thats is equal to item.joke to not duplicate
     report = report.filter(item => item.joke !== joke);
+    console.log(report);
+    
 
     const date: string = new Date().toISOString();
     const scoredJoke: ReportAcudits = { joke, score, date };
-
+    // add the joke with the new score or updated score
     report.push(scoredJoke);
     console.log(report);
 }
 
-
-
-
+// this function calls the randomFetch() function
+// if the client doesnt want to score the Joke, can click in the nextJoke button
+// the function check first if the joke is already in the array and if doesnt exist
+// push's it to array
 function nextJoke() {    
     const exist = report.some(item => item.joke === joke);
     // console.log(exist);
@@ -173,19 +182,23 @@ function nextJoke() {
         randomFetch();
     }
 }
-let numbers: number[] = [];
 
+
+let numbers: number[] = [];
+// this function changes the background
+// first saves a randomNumber in a array
+// remove and add class depending on the randomNumber 
 const randomBg = () => {
     let randomSvg: number = Math.ceil(Math.random() * 9);
     let lastIndex = numbers.length -1;
     if(lastIndex >= 0 ) {
         const lastValue = numbers[lastIndex];
-        console.log(lastValue + " " + "ultimo valor");
+        // console.log(lastValue + " " + "ultimo valor");
         containerBg.classList.remove(`svg${lastValue}`);
         
     }
     numbers.push(randomSvg);
-    console.log(randomSvg);
+    // console.log(randomSvg);
     // console.log(numbers);
     containerBg.classList.add(`svg${randomSvg}`);
 }

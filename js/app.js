@@ -26,6 +26,7 @@ const fetchOptions = {
     method: 'GET',
     headers: headers,
 };
+// this functions call the API randomJoke or Chuck depending in the random number result
 const randomFetch = () => __awaiter(void 0, void 0, void 0, function* () {
     let result = Math.floor(Math.random() * 2);
     // console.log(result);
@@ -36,6 +37,7 @@ const randomFetch = () => __awaiter(void 0, void 0, void 0, function* () {
         randomChuck();
     }
 });
+// this function call the ramdomJoke API
 function randomJoke() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -44,7 +46,7 @@ function randomJoke() {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const ramdomData = yield response.json();
-            console.log(ramdomData.joke);
+            // console.log(ramdomData.joke);
             if (containerText) {
                 containerText.innerHTML = `${ramdomData.joke}`;
                 joke = ramdomData.joke;
@@ -57,6 +59,7 @@ function randomJoke() {
     });
 }
 const urlApiChuck = "https://api.chucknorris.io/jokes/random";
+// this function call the Chuck API
 const randomChuck = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const res = yield fetch(urlApiChuck);
@@ -82,6 +85,7 @@ const optionsWeather = {
         'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com'
     }
 };
+// // this function call the Weather API
 const weatherFetch = () => {
     let latitude;
     let longitude;
@@ -99,6 +103,7 @@ const weatherFetch = () => {
         });
     });
 };
+// addEventListners to the Score buttons and call the function GetScore with the params joke and score
 if (btn1 && btn2 && btn3) {
     btn1.addEventListener('click', () => {
         getScore(joke, 1);
@@ -110,8 +115,10 @@ if (btn1 && btn2 && btn3) {
         getScore(joke, 3);
     });
 }
+// the function accepts the params joke and score
 function getScore(joke, score) {
     report = report.filter(item => item.joke !== joke);
+    console.log(report);
     const date = new Date().toISOString();
     const scoredJoke = { joke, score, date };
     report.push(scoredJoke);
@@ -137,11 +144,11 @@ const randomBg = () => {
     let lastIndex = numbers.length - 1;
     if (lastIndex >= 0) {
         const lastValue = numbers[lastIndex];
-        console.log(lastValue + " " + "ultimo valor");
+        // console.log(lastValue + " " + "ultimo valor");
         containerBg.classList.remove(`svg${lastValue}`);
     }
     numbers.push(randomSvg);
-    console.log(randomSvg);
+    // console.log(randomSvg);
     // console.log(numbers);
     containerBg.classList.add(`svg${randomSvg}`);
 };
